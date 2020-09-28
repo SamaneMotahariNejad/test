@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   editChamp = false;
 
   @Input() config: TreeviewConfig;
-  @ViewChild(TreeviewComponent, { static: false }) treeviewComponent: TreeviewComponent;
+  @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
 
   constructor() { }
 
