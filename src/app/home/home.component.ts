@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TreeviewComponent, TreeviewConfig, TreeviewHelper, TreeviewItem } from 'ngx-treeview';
 import { remove } from 'lodash';
 
@@ -8,7 +8,7 @@ import { remove } from 'lodash';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  items: TreeviewItem[];
+  items: TreeviewItem[] = [];
   Items;
   selectedItem;
   deleteEvent = false;
@@ -17,10 +17,17 @@ export class HomeComponent implements OnInit {
   @Input() config: TreeviewConfig;
   @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
 
-  constructor() { }
+  constructor() {
+    this.config = TreeviewConfig.create({
+      hasAllCheckBox: false,
+      hasCollapseExpand: false,
+      hasFilter: true,
+      maxHeight: 500
+    });
+  }
 
   ngOnInit() {
-    this.getProducts();
+    this.items = this.getProducts();
   }
 
   getProducts(): TreeviewItem[] {
@@ -32,7 +39,6 @@ export class HomeComponent implements OnInit {
       ]
     });
     this.selectedItem = this.Items.text;
-
     return [this.Items];
   }
 
